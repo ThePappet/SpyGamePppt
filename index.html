@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0d10">
+  <title>Шпион — игра на компанию</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Экран 1: создание игры -->
+  <section id="screen-setup" class="screen active">
+    <header class="app-header">
+      <h1 class="logo">ШПИОН</h1>
+      <p class="tagline">Игра на компанию · один телефон</p>
+    </header>
+
+    <div class="screen-body">
+      <h2 class="section-title">Игроки <span id="players-count" class="badge">0</span></h2>
+      <form id="add-player-form" class="add-row" autocomplete="off">
+        <input id="player-input" type="text" placeholder="Имя игрока" maxlength="20">
+        <button type="submit" class="btn btn-icon" aria-label="Добавить игрока">+</button>
+      </form>
+      <ul id="players-list" class="chips" hidden></ul>
+      <p id="players-hint" class="hint">Добавьте минимум 3 игроков</p>
+
+      <h2 class="section-title">Категория</h2>
+      <div id="categories" class="chips"></div>
+
+      <h2 class="section-title">Шпионы</h2>
+      <div id="spy-mode" class="segmented">
+        <button type="button" class="seg-btn active" data-mode="fixed">Число</button>
+        <button type="button" class="seg-btn" data-mode="random">Случайно</button>
+      </div>
+      <div id="spy-fixed" class="stepper">
+        <button type="button" id="spy-minus" class="btn btn-icon big" aria-label="Меньше шпионов">−</button>
+        <div class="stepper-value" id="spy-value">1</div>
+        <button type="button" id="spy-plus" class="btn btn-icon big" aria-label="Больше шпионов">+</button>
+      </div>
+      <p id="spy-hint" class="hint"></p>
+    </div>
+
+    <footer class="screen-footer">
+      <button id="btn-start" class="btn btn-primary" disabled>Начать игру</button>
+    </footer>
+  </section>
+
+  <!-- Экран 2: раздача карточек -->
+  <section id="screen-deal" class="screen">
+    <div class="deal-top">
+      <div id="deal-progress" class="deal-progress"></div>
+    </div>
+
+    <div class="card-stage">
+      <div id="card" class="card" role="button" tabindex="0" aria-label="Карточка роли">
+        <div class="card-inner">
+          <div class="card-face card-front">
+            <div class="card-kicker">Игрок</div>
+            <div id="card-name" class="card-name"></div>
+            <div class="card-tap">Нажмите, чтобы открыть</div>
+          </div>
+          <div class="card-face card-back" id="card-back">
+            <div id="role-kicker" class="card-kicker"></div>
+            <div id="role-reveal" class="role-reveal"></div>
+            <div class="card-tap">Нажмите, чтобы скрыть</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="deal-bottom">
+      <p id="deal-hint" class="deal-hint">Передайте телефон</p>
+    </div>
+  </section>
+
+  <!-- Экран 3: порядок хода -->
+  <section id="screen-results" class="screen">
+    <header class="app-header">
+      <h1 class="logo small">Порядок хода</h1>
+      <p class="tagline">Определите, кто говорит первым</p>
+    </header>
+
+    <div class="screen-body">
+      <div id="reveal-panel" class="reveal-panel" hidden>
+        <div class="reveal-block">
+          <div class="card-kicker">Слово мирных</div>
+          <div id="reveal-word" class="reveal-word"></div>
+        </div>
+        <div class="reveal-block">
+          <div class="card-kicker danger-kicker">Шпионы</div>
+          <div id="reveal-spies" class="reveal-spies"></div>
+        </div>
+      </div>
+      <ol id="turn-order" class="turn-list"></ol>
+    </div>
+
+    <footer class="screen-footer">
+      <button id="btn-finish" class="btn btn-primary">Завершить игру</button>
+      <div id="footer-actions" class="footer-row" hidden>
+        <button id="btn-new-game" class="btn btn-ghost">Новая игра</button>
+        <button id="btn-replay" class="btn btn-primary">Повторить игру</button>
+      </div>
+    </footer>
+  </section>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
